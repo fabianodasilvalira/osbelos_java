@@ -20,8 +20,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Usuario {
-	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String url_foto;
@@ -31,7 +32,7 @@ public class Usuario {
 	private String senha;
 	@Enumerated
 	private Status status;
-	
+
 	public Usuario() {
 		super();
 	}
@@ -44,7 +45,39 @@ public class Usuario {
 		this.contato = dados.contato();
 		this.senha = dados.senha();
 		this.status = dados.status();
-		
+
+	}
+
+	public void atualizarInformacoes(DadosAtualizacaoUsuario dados) {
+		if (dados.nome() != null) {
+			this.nome = dados.nome();
+		}
+		if (dados.url_foto() != null) {
+			this.url_foto = dados.url_foto();
+		}
+		if (dados.bebidas_alcoolicas() != null) {
+			this.bebidas_alcoolicas = dados.bebidas_alcoolicas();
+		}
+		if (dados.bebida_predileta() != null) {
+			this.bebida_predileta = dados.bebida_predileta();
+		}
+		if (dados.contato() != null) {
+			this.contato = dados.contato();
+		}
+		if (dados.senha() != null) {
+			this.senha = dados.senha();
+		}
+		if (dados.status() != null) {
+			this.status = dados.status();
+		}
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -119,7 +152,5 @@ public class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }
