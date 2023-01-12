@@ -1,4 +1,4 @@
-package fasira.osbelos.usuario;
+package fasira.osbelos.domain.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -12,6 +12,8 @@ public record DadosCadastroUsuario(
 		
 		@NotBlank
 		String contato, 
+		@NotBlank
+		String login, 
 		@NotBlank
 		String senha, 
 		Status status

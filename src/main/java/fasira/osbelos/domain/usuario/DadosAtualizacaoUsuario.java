@@ -1,4 +1,4 @@
-package fasira.osbelos.usuario;
+package fasira.osbelos.domain.usuario;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -9,7 +9,8 @@ public record DadosAtualizacaoUsuario(
 		String url_foto, 
 		String bebidas_alcoolicas, 
 		String bebida_predileta, 
-		String contato, 
+		String contato,
+		String login, 
 		String senha, 
 		Status status) {
 

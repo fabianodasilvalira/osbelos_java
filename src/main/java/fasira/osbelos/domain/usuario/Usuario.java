@@ -1,6 +1,12 @@
-package fasira.osbelos.usuario;
+package fasira.osbelos.domain.usuario;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -19,20 +25,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Usuario implements UserDetails{
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String url_foto;
 	private String bebidas_alcoolicas;
 	private String bebida_predileta;
 	private String contato;
+	private String login;
 	private String senha;
 	@Enumerated
 	private Status status;
-
+	
 	public Usuario() {
 		super();
 	}
@@ -43,11 +49,12 @@ public class Usuario {
 		this.bebida_predileta = dados.bebida_predileta();
 		this.bebidas_alcoolicas = dados.bebidas_alcoolicas();
 		this.contato = dados.contato();
+		this.login = dados.login();
 		this.senha = dados.senha();
 		this.status = dados.status();
-
+		
 	}
-
+	
 	public void atualizarInformacoes(DadosAtualizacaoUsuario dados) {
 		if (dados.nome() != null) {
 			this.nome = dados.nome();
@@ -63,6 +70,9 @@ public class Usuario {
 		}
 		if (dados.contato() != null) {
 			this.contato = dados.contato();
+		}
+		if (dados.login() != null) {
+			this.login = dados.login();
 		}
 		if (dados.senha() != null) {
 			this.senha = dados.senha();
@@ -135,6 +145,15 @@ public class Usuario {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
 
 	@Override
 	public int hashCode() {
@@ -152,5 +171,56 @@ public class Usuario {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	public void excluir() {
+		this.status = Status.INATIVO;
+		
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+
+	
+	
 
 }
