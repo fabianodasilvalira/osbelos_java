@@ -1,4 +1,6 @@
-package fasira.osbelos.domain.usuario;
+package fasira.osbelos.domain.usuarios;
+
+import fasira.osbelos.util.Status;
 
 public record DadosListagemUsuario(Long id, String nome, String url_foto, String bebidas_alcoolicas, String bebida_predileta, String contato, String login, Status status) {
 	

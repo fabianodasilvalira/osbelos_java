@@ -1,4 +1,4 @@
-package fasira.osbelos.usuario;
+package fasira.osbelos.autenticacao;
 
 public record DadosAutenticacao (String login, String senha){
 	

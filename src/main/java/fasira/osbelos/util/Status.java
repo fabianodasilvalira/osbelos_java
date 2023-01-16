@@ -1,4 +1,4 @@
-package fasira.osbelos.domain.usuario;
+package fasira.osbelos.util;
 
 public enum Status {
 	ATIVO,

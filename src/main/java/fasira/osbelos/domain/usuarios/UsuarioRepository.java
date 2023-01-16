@@ -1,4 +1,4 @@
-package fasira.osbelos.domain.usuario;
+package fasira.osbelos.domain.usuarios;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

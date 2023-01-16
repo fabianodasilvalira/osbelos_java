@@ -25,8 +25,8 @@ import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("usuarios")
-public class UsuarioControllers {
+@RequestMapping("comentarios")
+public class ComentariosControllers {
 	
 	@Autowired
 	private UsuarioRepository repository;

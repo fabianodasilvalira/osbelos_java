@@ -1,5 +1,6 @@
-package fasira.osbelos.domain.usuario;
+package fasira.osbelos.domain.usuarios;
 
+import fasira.osbelos.util.Status;
 import jakarta.validation.constraints.NotNull;
 
 public record DadosAtualizacaoUsuario(	
