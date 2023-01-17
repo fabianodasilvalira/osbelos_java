@@ -15,4 +15,4 @@ PRIMARY KEY (id)
 );
 
 INSERT INTO osbelos.usuarios (nome, url_foto, bebidas_alcoolicas, bebida_predileta, contato, login, senha, status) 
-VALUES ('Fabiano', 'http//qualquercoisa', 'SIM', 'CERVEJA', '86998181489', 'fabianolira', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', 'ATIVO');
+VALUES ('Fabiano', 'http//qualquercoisa', 'SIM', 'CERVEJA', '86998181489', 'fabianolira', '$2a$10$Y50UaMFOxteibQEYLrwuHeehHYfcoafCopUazP12.rqB41bsolF5.', '1');
