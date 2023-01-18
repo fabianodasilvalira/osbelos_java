@@ -10,7 +10,6 @@ public record DadosCadastroPostagens(
 		String url_postagem, 
 		@NotBlank
 		String legenda, 
-		@NotBlank
 		Status status
 		) {
 
