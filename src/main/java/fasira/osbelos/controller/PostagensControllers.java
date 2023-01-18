@@ -43,8 +43,7 @@ public class PostagensControllers {
 	
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemPostagens>> listar(Pageable paginacao){
-		
-		
+
 		var page = repository.findAll(paginacao).map(DadosListagemPostagens::new);
 		return ResponseEntity.ok(page);
 	}

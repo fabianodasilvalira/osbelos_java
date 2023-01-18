@@ -2,12 +2,17 @@ package fasira.osbelos.domain.postagens;
 
 import java.util.Objects;
 
+import fasira.osbelos.domain.usuarios.Usuario;
 import fasira.osbelos.util.Status;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -25,7 +30,9 @@ public class Postagens {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String usuario_id;
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id")
+	private Usuario usuario_id;
 	private String url_postagem;
 	private String legenda;
 
@@ -81,11 +88,13 @@ public class Postagens {
 		this.id = id;
 	}
 
-	public String getUsuario_id() {
+
+
+	public Usuario getUsuario_id() {
 		return usuario_id;
 	}
 
-	public void setUsuario_id(String usuario_id) {
+	public void setUsuario_id(Usuario usuario_id) {
 		this.usuario_id = usuario_id;
 	}
 
