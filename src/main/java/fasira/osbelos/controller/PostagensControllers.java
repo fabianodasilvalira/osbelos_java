@@ -1,5 +1,14 @@
 package fasira.osbelos.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
+
+import javax.imageio.ImageIO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,12 +36,27 @@ public class PostagensControllers {
 	@Autowired
 	private PostagensRepository repository;
 	
-	
+	 private static String caminhoImagem = System.getProperty("user.dir") + "/postagensUpload/";
+
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<DadosDetalhamentoPostagens> cadastrar(@RequestBody @Valid DadosCadastroPostagens dados, UriComponentsBuilder uriBuilder) {
-		System.out.println(" ----- "+ dados);
+	public ResponseEntity<DadosDetalhamentoPostagens> cadastrar(@RequestBody @Valid DadosCadastroPostagens dados, UriComponentsBuilder uriBuilder) throws IOException {
+		
+		String base64string = dados.url_postagem();
+		
+		base64string = base64string.replaceFirst("^data:image/[^;]*;base64,?","");
+		System.out.println(base64string);
+
+		byte [] decodeImg = Base64.getDecoder().decode(base64string);
+		java.nio.file.Path caminho = Paths.get(caminhoImagem+"casa.jpeg");
+		System.out.println("caminho: "+caminho);
+		Files.write(caminho, decodeImg);
+
+		
+		System.out.println(dados.url_postagem());
+
+		
 		var postagem = new Postagens(dados);
 		repository.save(postagem);
 		
@@ -43,7 +67,6 @@ public class PostagensControllers {
 	
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemPostagens>> listar(Pageable paginacao){
-
 		var page = repository.findAll(paginacao).map(DadosListagemPostagens::new);
 		return ResponseEntity.ok(page);
 	}
@@ -70,6 +93,8 @@ public class PostagensControllers {
 //		return ResponseEntity.noContent().build();
 //	}
 
+
+	
 }
 
 

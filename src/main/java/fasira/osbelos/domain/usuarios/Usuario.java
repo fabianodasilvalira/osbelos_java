@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import fasira.osbelos.util.Status;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Usuario implements UserDetails{
 	private Status status;
 	
 	public Usuario() {
-		super();
+
 	}
 
 	public Usuario(DadosCadastroUsuario dados) {
@@ -77,9 +78,7 @@ public class Usuario implements UserDetails{
 		if (dados.login() != null) {
 			this.login = dados.login();
 		}
-		if (dados.senha() != null) {
-			this.senha = dados.senha();
-		}
+
 		if (dados.status() != null) {
 			this.status = dados.status();
 		}
@@ -220,6 +219,11 @@ public class Usuario implements UserDetails{
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	public Usuario listarUsuarios() {
+		
+		return null;
 	}
 
 

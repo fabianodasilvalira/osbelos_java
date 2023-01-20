@@ -12,7 +12,6 @@ public record DadosAtualizacaoUsuario(
 		String bebida_predileta, 
 		String contato,
 		String login, 
-		String senha, 
 		Status status) {
 
 }

@@ -78,8 +78,7 @@ public class Postagens {
 //		}
 	}
 
-	
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -88,7 +87,11 @@ public class Postagens {
 		this.id = id;
 	}
 
-
+	public String getUsuario_nome() {
+		var nome_usuario = this.usuario_id.getNome();
+		return nome_usuario;
+		
+	}
 
 	public Usuario getUsuario_id() {
 		return usuario_id;
