@@ -43,9 +43,9 @@ public class Postagens {
 		super();
 	}
 
-	public Postagens(DadosCadastroPostagens dados) {
+	public Postagens(DadosCadastroPostagens dados, String caminho) {
 		this.usuario_id = dados.usuario_id();
-		this.url_postagem = dados.url_postagem();
+		this.url_postagem = caminho;
 		this.legenda = dados.legenda();
 		this.status = dados.status();
 

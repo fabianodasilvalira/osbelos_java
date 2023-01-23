@@ -15,4 +15,5 @@ public record DadosCadastroPostagens(
 		Status status
 		) {
 
+
 }
