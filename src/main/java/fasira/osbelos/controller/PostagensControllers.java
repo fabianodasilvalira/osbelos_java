@@ -27,66 +27,51 @@ import fasira.osbelos.domain.postagens.Postagens;
 import fasira.osbelos.domain.postagens.PostagensRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-
+import fasira.osbelos.util.Conversor;
 
 @RestController
 @RequestMapping("postagens")
 public class PostagensControllers {
-	
+
 	@Autowired
 	private PostagensRepository repository;
-	
-	 private static String caminhoImagem = System.getProperty("user.dir") + "/src/main/resources/uploadImages/";
 
-	
+	private static String caminhoImagem = System.getProperty("user.dir") + "/src/main/resources/uploadImages/";
+
 	@PostMapping
 	@Transactional
-	public ResponseEntity<DadosDetalhamentoPostagens> cadastrar(@RequestBody @Valid DadosCadastroPostagens dados, UriComponentsBuilder uriBuilder) throws IOException {
-		 
-		String base64string = dados.url_postagem();
-		
-		base64string = base64string.replaceFirst("^data:image/[^;]*;base64,?","");
-		System.out.println(base64string);
+	public ResponseEntity<DadosDetalhamentoPostagens> cadastrar(@RequestBody @Valid DadosCadastroPostagens dados,
+			UriComponentsBuilder uriBuilder) throws IOException {
 
-		byte [] decodeImg = Base64.getDecoder().decode(base64string);
+		String base64string = dados.url_postagem();
+		var extension = base64string.substring(11, 14);
+		base64string = base64string.replaceFirst("^data:image/[^;]*;base64,?", "");
+
+		byte[] decodeImg = Base64.getDecoder().decode(base64string);
 		Date dataAtual = new Date();
 
-		var nomeArquivo = getHashMd5(dataAtual.toString());
-		java.nio.file.Path caminho = Paths.get(caminhoImagem+nomeArquivo+".jpeg");
-				
+		var nomeArquivo = Conversor.getHashMd5(dataAtual.toString());
+		java.nio.file.Path caminho = Paths.get(caminhoImagem + nomeArquivo + "." + extension);
+
 		Files.write(caminho, decodeImg);
-	
-		var url_postagem =  caminhoImagem+nomeArquivo+".jpeg";
+
+		var url_postagem = caminhoImagem + nomeArquivo +  "." + extension;
 		var postagem = new Postagens(dados, url_postagem);
 		repository.save(postagem);
-	
-		System.out.println("caminho: "+caminho);
 
-		
-		
 		var uri = uriBuilder.path("/postagem/{id}").buildAndExpand(postagem.getId()).toUri();
 		return ResponseEntity.created(uri).body(new DadosDetalhamentoPostagens(postagem));
-		
+
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<Page<DadosListagemPostagens>> listar(Pageable paginacao){
+	public ResponseEntity<Page<DadosListagemPostagens>> listar(Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(DadosListagemPostagens::new);
 		return ResponseEntity.ok(page);
 	}
-	
-    public static String getHashMd5(String value) {
-        MessageDigest md;
-        try {
-            md = MessageDigest.getInstance("MD5");
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-        BigInteger hash = new BigInteger(1, md.digest(value.getBytes()));
-        return hash.toString(16);
-    }
+
 //	
-	
+
 //	@GetMapping("/{id}")
 //	public ResponseEntity<DadosDetalhamentoUsuario> detalhar(@PathVariable Long id) {
 //		var usuario = repository.getReferenceById(id);
@@ -108,16 +93,4 @@ public class PostagensControllers {
 //		return ResponseEntity.noContent().build();
 //	}
 
-
-	
 }
-
-
-
-
-
-
-
-
-
-

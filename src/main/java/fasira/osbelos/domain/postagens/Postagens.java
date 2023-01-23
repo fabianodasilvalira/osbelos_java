@@ -30,6 +30,7 @@ public class Postagens {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id")
 	private Usuario usuario_id;
@@ -50,7 +51,7 @@ public class Postagens {
 		this.status = dados.status();
 
 	}
-
+ 
 	public void atualizarInformacoes(DadosAtualizacaoPostagens dados) {
 //		if (dados.nome() != null) {
 //			this.nome = dados.nome();
