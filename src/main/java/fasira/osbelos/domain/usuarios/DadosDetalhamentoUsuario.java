@@ -8,4 +8,6 @@ public record DadosDetalhamentoUsuario(Long id, String nome, String url_foto, St
 		this(usuario.getId(),usuario.getNome(), usuario.getUrl_foto(), usuario.getBebidas_alcoolicas(), usuario.getBebida_predileta(), usuario.getContato(), usuario.getLogin(), usuario.getStatus());
 	}
 
+
+
 }

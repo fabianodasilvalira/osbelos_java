@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import fasira.osbelos.domain.usuarios.Usuario;
 import fasira.osbelos.util.Status;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
