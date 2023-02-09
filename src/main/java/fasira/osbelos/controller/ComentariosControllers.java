@@ -19,7 +19,7 @@ public class ComentariosControllers {
 	@Autowired
 	private ComentariosRepository repository;
 	
-	
+	 
 	
 	@GetMapping
 	public ResponseEntity<Page<DadosListagemComentarios>> listar(Pageable paginacao) {
