@@ -43,9 +43,6 @@ public class Usuario implements UserDetails{
 	@Enumerated
 	private Status status;
 	
-	public Usuario() {
-
-	}
 
 	public Usuario(DadosCadastroUsuario dados) {
 		this.nome = dados.nome();
