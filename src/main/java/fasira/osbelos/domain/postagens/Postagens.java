@@ -39,9 +39,6 @@ public class Postagens {
 	@Enumerated
 	private Status status;
 
-	public Postagens() {
-		super();
-	}
 
 	public Postagens(DadosCadastroPostagens dados, String caminho) {
 		this.usuario_id = dados.usuario_id();
